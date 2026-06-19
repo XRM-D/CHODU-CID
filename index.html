@@ -1,0 +1,312 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8"/>
+<meta name="viewport" content="width=device-width,initial-scale=1.0"/>
+<title>DMRX · INTEL</title>
+<link href="https://fonts.googleapis.com/css2?family=Orbitron:wght@700;900&family=Share+Tech+Mono&display=swap" rel="stylesheet"/>
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+
+:root{
+  --bg:#070d1a;
+  --card:#0d1630;
+  --cyan:#00d4ff;
+  --cyan2:#4d9fff;
+  --green:#00ff88;
+  --red:#ff3355;
+  --text:#c8dce8;
+  --dim:#2a4a5a;
+  --mono:'Share Tech Mono',monospace;
+  --head:'Orbitron',sans-serif;
+}
+
+body{
+  background:var(--bg);
+  color:var(--text);
+  font-family:var(--mono);
+  min-height:100vh;
+  padding:24px 14px 80px;
+  background-image:
+    radial-gradient(ellipse 80% 40% at 50% -10%,#00d4ff0d 0%,transparent 70%),
+    linear-gradient(180deg,#070d1a 0%,#050810 100%);
+}
+
+/* ── HEADER ── */
+.header{text-align:center;margin-bottom:28px}
+
+.status-pill{
+  display:inline-flex;align-items:center;gap:7px;
+  background:#00ff8812;border:1px solid #00ff8830;
+  border-radius:999px;padding:5px 14px;
+  font-size:10px;letter-spacing:4px;color:var(--green);
+  margin-bottom:16px;
+}
+.status-dot{
+  width:7px;height:7px;border-radius:50%;
+  background:var(--green);box-shadow:0 0 8px var(--green);
+  animation:pulse 2s ease-in-out infinite;
+}
+@keyframes pulse{0%,100%{opacity:1}50%{opacity:.4}}
+
+.logo{
+  font-family:var(--head);font-size:54px;font-weight:900;
+  letter-spacing:18px;color:#fff;
+  text-shadow:0 0 40px #00d4ff55,0 0 80px #00d4ff22;
+  line-height:1;
+}
+.logo-sub{
+  font-size:10px;letter-spacing:7px;color:var(--cyan2);
+  opacity:.7;margin-top:8px;
+}
+.header-rule{
+  height:1px;max-width:380px;margin:18px auto 0;
+  background:linear-gradient(90deg,transparent,var(--cyan),transparent);
+  opacity:.2;
+}
+
+/* ── WRAP ── */
+.wrap{max-width:640px;margin:0 auto}
+
+/* ── INPUT CARD ── */
+.input-card{
+  background:var(--card);
+  border:1px solid rgba(0,212,255,.15);
+  border-radius:12px;padding:22px 22px 24px;
+  margin-bottom:16px;
+  box-shadow:0 0 32px #00d4ff08,inset 0 1px 0 rgba(255,255,255,.03);
+}
+.input-label{
+  display:flex;align-items:center;gap:8px;
+  font-size:9px;letter-spacing:4px;color:var(--cyan);
+  opacity:.6;margin-bottom:12px;
+}
+.input-label::before{content:'—';opacity:.5}
+
+input[type=text]{
+  width:100%;background:#070d1a;
+  border:1px solid rgba(0,212,255,.25);border-radius:7px;
+  padding:13px 18px;color:var(--cyan);
+  font-size:20px;letter-spacing:3px;font-family:var(--mono);
+  outline:none;transition:border-color .2s,box-shadow .2s;
+  margin-bottom:14px;
+}
+input[type=text]:focus{
+  border-color:var(--cyan);box-shadow:0 0 16px rgba(0,212,255,.15);
+}
+input[type=text]::placeholder{color:rgba(0,212,255,.2);font-size:15px}
+
+.search-btn{
+  width:100%;
+  background:linear-gradient(135deg,#00d4ff,#4d9fff);
+  border:none;border-radius:8px;
+  padding:14px;color:#030810;
+  font-family:var(--head);font-size:13px;letter-spacing:4px;font-weight:700;
+  cursor:pointer;transition:all .2s;
+  box-shadow:0 4px 24px rgba(0,212,255,.25);
+}
+.search-btn:disabled{opacity:.4;cursor:not-allowed;transform:none}
+
+/* ── STATS ── */
+.stats-row{display:grid;grid-template-columns:1fr 1fr 1fr;gap:10px;margin-bottom:16px}
+.stat-box{
+  background:var(--card);border:1px solid rgba(0,212,255,.1);
+  border-radius:10px;padding:16px 12px;text-align:center;
+}
+.stat-val{
+  font-family:var(--head);font-size:26px;font-weight:700;
+  color:var(--cyan);letter-spacing:2px;
+  text-shadow:0 0 16px rgba(0,212,255,.4);
+}
+.stat-label{font-size:8px;letter-spacing:3px;color:var(--dim);margin-top:5px}
+
+/* ── REPORT SECTION ── */
+.report-section{
+  background:var(--card);border:1px solid rgba(0,212,255,.15);
+  border-radius:12px;overflow:hidden;
+  display:none;
+  box-shadow:0 0 40px #00d4ff0a;
+}
+.report-section.visible{display:block}
+
+.report-header{
+  background:linear-gradient(135deg,#00d4ff0d,#4d9fff0d);
+  border-bottom:1px solid rgba(0,212,255,.1);
+  padding:14px 20px;
+  display:flex;align-items:center;justify-content:space-between;
+}
+.report-title{
+  display:flex;align-items:center;gap:10px;
+  font-size:12px;letter-spacing:2px;color:#fff;
+}
+.report-dot{
+  width:8px;height:8px;border-radius:50%;background:var(--cyan);
+  box-shadow:0 0 8px var(--cyan);animation:pulse 2s infinite;
+}
+.live-badge{
+  background:#00d4ff1a;border:1px solid var(--cyan);
+  border-radius:4px;padding:4px 12px;
+  font-size:9px;letter-spacing:3px;color:var(--cyan);font-weight:bold;
+}
+
+.meta-line{
+  padding:12px 20px;
+  font-size:11px;color:var(--dim);letter-spacing:1px;
+  border-bottom:1px solid rgba(0,212,255,.06);
+  background:#090e1c;
+}
+.meta-line span{color:var(--cyan);font-weight:bold}
+
+/* progress */
+.prog-wrap{padding:16px 20px}
+.prog-row{
+  display:flex;justify-content:space-between;
+  font-size:9px;color:rgba(0,212,255,.4);
+  letter-spacing:2px;margin-bottom:7px;
+}
+.prog-track{background:#060c18;border-radius:3px;height:3px}
+.prog-fill{
+  height:100%;width:0%;border-radius:3px;
+  background:linear-gradient(90deg,var(--cyan),var(--cyan2));
+  box-shadow:0 0 10px var(--cyan);transition:width .25s ease;
+}
+
+/* error */
+.error-box{
+  background:#ff335510;border:1px solid #ff335530;
+  border-radius:8px;padding:12px 16px;margin:16px;
+  font-size:11px;color:var(--red);letter-spacing:1px;display:none;
+}
+.error-box.visible{display:block}
+
+/* iframe view */
+.iframe-wrap{
+  padding:0 16px 20px;display:none;
+}
+.iframe-wrap.visible{display:block}
+.iframe-box{
+  width:100%;height:500px;border:1px solid rgba(0,212,255,.15);
+  border-radius:8px;background:#ffffff;
+}
+</style>
+</head>
+<body>
+
+<div class="header">
+  <div><div class="status-pill"><div class="status-dot"></div>SYSTEM ONLINE</div></div>
+  <div class="logo">DMRX</div>
+  <div class="logo-sub">PHONE INTELLIGENCE PLATFORM</div>
+  <div class="header-rule"></div>
+</div>
+
+<div class="wrap">
+
+  <div class="input-card">
+    <div class="input-label">TARGET NUMBER</div>
+    <input type="text" id="phoneInput" placeholder="Enter 10-digit number..." maxlength="10" inputmode="numeric" 
+      oninput="this.value = this.value.replace(/[^0-9]/g, '').slice(0, 10);"
+      onkeydown="if(event.key==='Enter')runScan()"/>
+    <button class="search-btn" id="searchBtn" onclick="runScan()">⚡ SEARCH</button>
+  </div>
+
+  <div class="stats-row">
+    <div class="stat-box"><div class="stat-val" id="statQ">0</div><div class="stat-label">QUERIES</div></div>
+    <div class="stat-box"><div class="stat-val" id="statF">0</div><div class="stat-label">FOUND</div></div>
+    <div class="stat-box"><div class="stat-val" id="statT">0</div><div class="stat-label">LAST MS</div></div>
+  </div>
+
+  <div class="report-section" id="reportSection">
+
+    <div class="report-header">
+      <div class="report-title"><div class="report-dot"></div>Intelligence Report</div>
+      <div class="live-badge">LIVE RESULT</div>
+    </div>
+
+    <div class="meta-line" id="metaLine">
+      TARGET : <span id="metaNum">—</span> &nbsp;|&nbsp;
+      SOURCE : <span>DMRX INTEL</span>
+    </div>
+
+    <div class="prog-wrap" id="progWrap">
+      <div class="prog-row"><span>CONNECTING SECURELY...</span><span id="progPct">0%</span></div>
+      <div class="prog-track"><div class="prog-fill" id="progFill"></div></div>
+    </div>
+
+    <div class="error-box" id="errorBox"></div>
+
+    <div class="iframe-wrap" id="iframeWrap">
+      <iframe class="iframe-box" id="iframeBox"></iframe>
+    </div>
+
+  </div>
+</div>
+
+<script>
+let queryCount = 0;
+
+async function sleep(ms){return new Promise(r=>setTimeout(r,ms))}
+
+async function runScan(){
+  const raw = document.getElementById('phoneInput').value.trim();
+  
+  if(!raw || raw.length !== 10){
+    showError('Please enter exactly 10 digits.');
+    return;
+  }
+
+  const num = raw;
+  const btn = document.getElementById('searchBtn');
+  btn.disabled = true; btn.textContent = 'SCANNING...';
+
+  // UI Resets
+  document.getElementById('reportSection').classList.add('visible');
+  document.getElementById('progWrap').style.display = 'block';
+  document.getElementById('errorBox').classList.remove('visible');
+  document.getElementById('iframeWrap').classList.remove('visible');
+  document.getElementById('iframeBox').src = ''; // Clear old src
+
+  document.getElementById('metaNum').textContent = num;
+  queryCount++;
+  document.getElementById('statQ').textContent = queryCount;
+
+  // Progress Bar Animation
+  for(let i=1; i<=10; i++){
+    await sleep(100);
+    const pct = i * 10;
+    document.getElementById('progFill').style.width = pct + '%';
+    document.getElementById('progPct').textContent = pct + '%';
+  }
+
+  // DIRECT IFRAME LOAD (No Fetch, No Proxy)
+  const targetUrl = "https://profexhub.org/Intel.php?number=" + num;
+  const iframe = document.getElementById('iframeBox');
+  
+  iframe.src = targetUrl; // Yahi link direct load hoga
+  
+  iframe.onload = () => {
+    document.getElementById('progWrap').style.display = 'none';
+    document.getElementById('iframeWrap').classList.add('visible');
+    document.getElementById('statF').textContent = '1';
+    btn.disabled = false; btn.textContent = '⚡ SEARCH';
+  };
+
+  // Agar iframe iframe load hone mein time lagaye
+  setTimeout(() => {
+    if(!document.getElementById('iframeWrap').classList.contains('visible')){
+      document.getElementById('progWrap').style.display = 'none';
+      document.getElementById('iframeWrap').classList.add('visible');
+      btn.disabled = false; btn.textContent = '⚡ SEARCH';
+    }
+  }, 3000);
+}
+
+function showError(msg){
+  const e = document.getElementById('errorBox');
+  e.textContent = msg; e.classList.add('visible');
+  document.getElementById('reportSection').classList.add('visible');
+  document.getElementById('progWrap').style.display = 'none';
+  document.getElementById('iframeWrap').classList.remove('visible');
+}
+</script>
+</body>
+</html>
